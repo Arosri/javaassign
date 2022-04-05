@@ -1,0 +1,124 @@
+1.
+class peri {
+    public static void main(String[] args) {
+        int l = 5;
+        int b = 7;
+        
+        int Perimeter = 2*(l+b);
+        int Area = l*b;
+        System.out.println("Perimeter = " + Perimeter + "\n" + "Area = " + Area); 
+    }
+}
+
+2.
+class tri {
+    public static void main(String[] args) {
+        int side1 = 2;
+        int side2 = 3;
+        int side3 = 5;
+        int Perimeter = side1 + side2 + side3;
+        System.out.println("Perimeter of triangle = " + Perimeter); 
+    }
+}
+
+5.
+class equal {
+    public static void main(String[] args) {
+        int a = 23;
+        int b = 45;
+        
+        if (a == b)
+           System.out.println("equal");
+        else
+           System.out.println("Not equal");
+    }
+}
+
+6.
+class power {
+     public static void main(String[] args) {
+        double p=math.pow(7,5);
+        System.ot.println("power is = " + p);
+    }
+}
+
+7.
+class q7 {
+    public static void main(String[] args) {
+        int a = 55;
+        int b = 70;
+        
+        if (a < 50 && a < b)
+            System.out.println("True");
+        else 
+            System.out.println("False");
+    }
+}
+
+8.
+class q8 {
+    public static void main(String[] args) {
+        int a = 55;
+        int b = 70;
+        
+        if (a < 50 || a < b)
+            System.out.println("Condition is True");
+        else 
+            System.out.println("Condition is False");
+    }
+
+
+3.
+class number {
+    public static void main(String[] args) {
+        int a = 2345;
+        int b = (a+8)/3;
+        int c = (b%5)*5;
+        System.out.println("Result =" + c);
+    }
+}
+
+4.
+class num {
+    public static void main(String[] args) {
+        int a = 2345;
+        a += 8;
+        a /= 3;
+        a %= 5;
+        a *= 5;
+        System.out.println("Result = " + a);
+    }
+}
+
+9.
+import java.text.DecimalFormat;
+class percent {
+    static DecimalFormat df = new DecimalFormat("0.00");
+
+    public static void main(String[] args) {
+        int sub1 = 78;
+        int sub2 = 45;
+        int sub3 = 62;
+        double total = sub1 + sub2 + sub3;
+        double percentage = (total/300)*100;
+        System.out.println("Total marks = " + (int) total);
+        System.out.println("Percentage = " + df.format(percentage));
+    }
+}
+
+10.
+class swap {
+    public static void main(String[] args) {
+        int a, b, c;
+        a = 6;
+        b = 8;
+
+        c = a;
+        a = b;
+        b = c;
+
+        System.out.println(a);
+        System.out.println(b);
+    }
+}
+
