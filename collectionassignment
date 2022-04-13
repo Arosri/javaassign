@@ -1,0 +1,499 @@
+1.Create a List of 10 Integer objects and try to access 15th index. Properly analysis the output.
+
+package project;
+import java.util.ArrayList;
+public class ArrayEx {
+	public static void main(String[] args)
+    {
+        // Creating an Empty Integer ArrayList
+        ArrayList<Integer> arr = new ArrayList<Integer>(10);
+        arr.add(12);
+        arr.add(13);
+        arr.add(17);
+        arr.add(15);
+        arr.add(18);
+        arr.add(19);
+        arr.add(20);
+        arr.add(34);
+        arr.add(76);
+        arr.add(120);
+        int element = arr.get(15);
+        System.out.println("the number at index 15 is="  +  element);
+    }
+        
+}
+
+2.Create a list of 10 Integer objects and process the list element by element to count objects containing even value. Print the total number of odd objects after counting even objects.
+
+package project;
+import java.util.ArrayList;
+
+public class ArrayOdd {
+	public static void main(String[] args) {
+        
+        ArrayList<Integer> arr = new ArrayList<>(10);
+        arr.add(1);
+        arr.add(2);
+        arr.add(3);
+        arr.add(5);
+        arr.add(8);
+        arr.add(19);
+        arr.add(20);
+        arr.add(34);
+        arr.add(73);
+        arr.add(18);
+     
+       
+        
+        int evenCount = 0;
+
+        for (Integer integer : arr) {
+            if(integer.intValue() % 2 ==0){
+                evenCount++;
+            }
+        }
+        int oddCount = arr.size()  - evenCount;
+        System.out.println("odd count =  " + oddCount);
+    }
+
+}
+
+
+Create a List of 10 Book objects, where Book is a user defined or custom class. Book class contains following field String bookName, String author, long isbn, & double price. Book class must be properly encapsulated and must implement data hiding. Book class contains parameterized constructors and no-argument constructor. Book class must override String toString() of Object class to represent Book object as string while printing. Kindly sort the list of book by price.
+
+
+package project;
+import java.util.*;
+import java.util.Comparator;
+class Books {
+	private String bookName;
+    private String author;
+    private long isbn;
+    private double price;
+    public Books(String bookName, String author, long isbn, double price) {
+        this.bookName = bookName;
+        this.author = author;
+        this.isbn = isbn;
+        this.price = price;
+    }
+    
+    public String toString() {
+        return 
+                "bookName='" + bookName + '\'' +
+                ", author='" + author + '\'' +
+                ", isbn=" + isbn +
+                ", price=" + price +
+                '}';
+    }
+    
+    public String getBookName() {
+        return bookName;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public long getIsbn() {
+        return isbn;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
+class Book
+{
+    public static void main(String[] args)
+    {
+        List<Books> books = new ArrayList<>(Arrays.asList(
+                                            new Books("A","ABC",125,250),
+                                            new Books("B","XYZ",234,1600),
+                                            new Books("C","AC",21,5200),
+                                            new Books("D","IJK",22,2500),
+                                            new Books("E","EF",23,1500),
+                                            new Books("P","AC",24,600),
+                                            new Books("L","AC",25,700),
+                                            new Books("K","AC",26,800),
+                                            new Books("j","AC",30,6500),
+                                            new Books("H","AXY",28,5000)
+                                             ));
+       
+        	Comparator<Books> bookprice = new Comparator<Books>() {
+                @Override
+                public int compare(Books b1, Books b2) {
+                    if(b1.getPrice() < b2.getPrice()) {
+                        return -1;
+                    } else if (b1.getPrice() > b2.getPrice()) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+
+                }
+            };
+        System.out.println("Sorted by price :" +books);
+    }
+}
+
+
+Create a List of 10 Student objects, where Student is a user defined class. Student class contains three private fields int rollNo, String name, and double cpi. Student class must override String toString() method of Object class. Kindly sort the student by there name. And also delete the students whose name starts with "A" & "J".
+package project;
+
+
+import java.util.*;
+
+
+ class Student {
+	private int rollno;
+	private String name;
+    private double cpi;
+ 
+    public Student(int rollno,String name, double cpi)
+    {
+    	this.rollno=rollno;
+        this.name = name;
+        this.cpi = cpi;
+    }
+ 
+    @Override
+    public String toString()
+    {
+        return "{" +" rollno="+ rollno +
+                        ", name='" + name + '\'' + ",cpi= " +cpi +
+                         "}";
+    }
+    public int getrollno() {
+        return rollno;
+    }
+    public String getname() {
+        return name;
+        }
+    public double getcpi() {
+        return cpi;
+    }
+ }
+class StudentNam
+        {
+            public static void main(String[] args)
+            {
+                List<Student> students = new ArrayList<>(Arrays.asList(
+                                                    new Student(1,"Ram",2),
+                                                    new Student(2,"Shyam",3),
+                                                    new Student(3,"Mohan",4),
+                                                    new Student(4,"Jack",14),
+                                                    new Student(5,"Zain",9),
+                                                    new Student(6,"Suzi",8),
+                                                    new Student(7,"Max",7),
+                                                    new Student(8,"Soha",6)
+                                                    ));
+                           
+                Comparator<Student> studentname = new Comparator<Student>() {
+                    @Override
+                    
+                
+                    public int compare(Student n1, Student n2) {
+                        return n1.getname().compareTo(n2.getname());
+                    }};
+                 
+                	Collections.sort(students,studentname);	
+                	for (Student student : students)
+		                if(student.getname().startsWith("A") || student.getname().startsWith("J")){
+		                    students.remove(students);
+		                    
+		                    System.out.println("Sorted by name :" + students);
+		                };
+                    }
+                
+		            
+                    
+       }
+     
+     
+  Create a List & Set of 10 integers and demonstrate ordered and unordered collection as well as duplicate allowed and not allowed. Demonstrate addAll() method also.
+
+
+ 
+       
+package project;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+
+public class ArrayEle {
+    public static void main(String[] args) {
+        
+        ArrayList<Integer> integers = new ArrayList<>(10);
+        
+
+        
+        integers.add(16);
+        integers.add(17);
+        integers.add(15);
+        integers.add(13);
+        integers.add(25);
+        integers.add(13);
+        integers.add(12);
+        integers.add(10);
+        
+        System.out.println("printing list");
+        System.out.println(integers);
+
+        
+        System.out.println("printing list using enhanced for loop");
+        for (Integer integer : integers) {
+            
+            int no = integer.intValue();
+            System.out.println(no);
+        }
+        
+        System.out.println("printing list using  for loop");
+        for (int i = 0; i < integers.size(); i++) {
+            
+            int no  = integers.get(i);
+            System.out.println(no);
+
+        }
+
+        
+        HashSet<Integer> integerHashSet = new HashSet<>();
+
+        //adding elements
+        integerHashSet.add(40);
+        integerHashSet.add(10);
+        integerHashSet.add(35);
+        integerHashSet.add(15);
+        integerHashSet.add(150);
+        integerHashSet.add(300);
+        integerHashSet.add(100);
+        integerHashSet.add(110);
+        integerHashSet.add(350);
+        integerHashSet.add(101);
+
+       
+        System.out.println("printing set");
+        System.out.println(integerHashSet);
+        
+        System.out.println("printing list using enhanced for loop");
+        for (Integer integer : integerHashSet) {
+            System.out.println(integer);
+        }
+
+        
+        integers.addAll(integerHashSet);
+        
+        System.out.println("list with added set");
+        System.out.println(integers);
+
+        
+
+        integerHashSet.addAll(integers);
+
+        
+        System.out.println("set with added list");
+        System.out.println(integerHashSet);
+
+        
+        Iterator<Integer> itr = integerHashSet.iterator();
+        System.out.println(itr.next().getClass());
+  }
+}
+
+
+Write a program to concatenate StringBuilder & StringBuffer objects.
+
+
+package project;
+
+public class Concatenation {
+	
+
+		public static void main(String[] args) {
+			// TODO Auto-generated method stub
+			 StringBuilder sb1=new StringBuilder("Arosri");
+		     StringBuilder sb2=new StringBuilder("Brahma");
+		     StringBuilder s=sb1.append(sb2);
+		     System.out.println(s.toString());
+		     
+		
+		 
+		StringBuffer sbf1=new StringBuffer();
+		sbf1.append("Java");
+		StringBuffer sbf2=new StringBuffer();
+		sbf2.append("Assignments");
+		StringBuffer sbf=sbf1.append(sbf2);
+		System.out.println(sbf.toString());
+				}
+}
+
+
+Get the product sorted by name
+
+package project;
+import java.util.*;
+
+class Produ
+{
+	private int id;
+	private String name;
+    private int price;
+ 
+    public Produ(int id,String name, int price)
+    {
+    	this.id=id;
+        this.name = name;
+        this.price = price;
+    }
+ 
+    @Override
+    public String toString()
+    {
+        return "{" +" id="+ id +
+                        ", name='" + name + '\'' +
+                         ", price ="+ price +
+                        '}';
+    }
+    public int getid() {
+        return id;
+    }
+ 
+    public String getname() {
+        return name;
+    }
+ 
+    public int getprice() {
+        return price;
+    }
+}
+ 
+class Prod
+{
+    public static void main(String[] args)
+    {
+        List<Produ> products = new ArrayList<>(Arrays.asList(
+                                            new Produ(1,"Mobile",80000),
+                                            new Produ(2,"Laptop",60000),
+                                            new Produ(3,"AC",50000)
+                                            
+                                             ));
+        Collections.sort(products, new Comparator<Produ>() {
+            @Override
+            public int compare(Produ p1, Produ p2) {
+                return p1.getprice() - p2.getprice();
+            }
+        });
+        System.out.println("Sorted by price :" +products);
+        Comparator<Produ> productid = new Comparator<Produ>() {
+            @Override
+            public int compare(Produ id1, Produ id2) {
+                if(id1.getid() < id2.getid()) {
+                    return -1;
+                } else if (id1.getid() > id2.getid()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+
+            }
+        };
+        Collections.sort(products, productid);
+        System.out.println("Sorted by id :" +products);
+        
+        Comparator<Produ> productname = new Comparator<Produ>() {
+            @Override
+            public int compare(Produ n1, Produ n2) {
+                return n1.getname().compareTo(n2.getname());
+            }
+        };
+        Collections.sort(products,productname);
+        System.out.println("Sorted by name :" + products); 
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+package project;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+public class IterateOverHashSet {
+    public static void main(String[] args) {
+        Set<String> programmingLanguages = new HashSet<>();
+        programmingLanguages.add("C");
+        programmingLanguages.add("C++");
+        programmingLanguages.add("Java");
+        programmingLanguages.add("Python");
+        programmingLanguages.add("PHP");
+        programmingLanguages.add("Ruby");
+
+        System.out.println("=== Iterate over a HashSet using Java 8 forEach and lambda ===");
+        programmingLanguages.forEach(programmingLanguage -> {
+            System.out.println(programmingLanguage);
+        });
+        System.out.println("=== Iterate over a HashSet using iterator() ===");
+        Iterator<String> programmingLanguageIterator = programmingLanguages.iterator();
+        while (programmingLanguageIterator.hasNext()) {
+            String programmingLanguage = programmingLanguageIterator.next();
+            System.out.println(programmingLanguage);
+        }
+        System.out.println("=== Iterate over a HashSet using iterator() and Java 8 forEachRemaining() method ===");
+        programmingLanguageIterator = programmingLanguages.iterator();
+        programmingLanguageIterator.forEachRemaining(programmingLanguage -> {
+            System.out.println(programmingLanguage);
+        });
+
+        System.out.println("=== Iterate over a HashSet using simple for-each loop ===");
+        for(String programmingLanguage: programmingLanguages) {
+            System.out.println(programmingLanguage);
+        }
+    }
+
+}
+
+
+
+
+
+Write a program to demonstrate boxing and un-boxing.
+
+
+package project;
+
+public class BoxingUnboxing {
+public static void main(String[] args) {
+package project;
+
+public class AutoboxingUnboxing {
+	public static void main(String[] args) {
+		
+        Integer objInteger = 23;
+       
+        int a = objInteger;
+
+        System.out.println(a);
+	}
+}
+		
+		//boxing
+        Integer objInteger = Integer.valueOf(5);
+        //un-boxing
+        int a = objInteger.intValue();
+
+        System.out.println(a);
+	}
+}
+
+
+
+
+Write a program to demonstrate autoboxing and unboxing
