@@ -471,20 +471,8 @@ package project;
 
 public class BoxingUnboxing {
 public static void main(String[] args) {
-package project;
 
-public class AutoboxingUnboxing {
-	public static void main(String[] args) {
-		
-        Integer objInteger = 23;
-       
-        int a = objInteger;
-
-        System.out.println(a);
-	}
-}
-		
-		//boxing
+	//boxing
         Integer objInteger = Integer.valueOf(5);
         //un-boxing
         int a = objInteger.intValue();
@@ -497,3 +485,15 @@ public class AutoboxingUnboxing {
 
 
 Write a program to demonstrate autoboxing and unboxing
+package project;
+
+public class AutoboxingUnboxing {
+	public static void main(String[] args) {
+		
+        Integer objInteger = 23;
+       
+        int a = objInteger;
+
+        System.out.println(a);
+	}
+}
