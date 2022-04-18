@@ -1,0 +1,239 @@
+
+package jdbc;
+
+import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Scanner;
+ class Library {
+	private double bid;
+	private String title;
+	private String Author;
+	private double price;
+	public double getBid() {
+		return bid;
+	}
+	public void setBid(double bid) {
+		this.bid = bid;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getAuthor() {
+		return Author;
+	}
+	public void setAuthor(String author) {
+		Author = author;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+}
+public class Lib {
+	Scanner sc=new Scanner(System.in);
+	
+	public static void main(String[] args) {
+		 
+		Scanner sc=new Scanner(System.in);
+		Lib book=new Lib();
+		int ch;
+		do
+		{
+		System.out.println("enter your choice");
+		
+		System.out.println("1.Insert the record");
+		System.out.println("2.Display the record");
+		System.out.println("3.Updating the record");
+		System.out.println("3.Deleting the record");
+		System.out.println("5.Exit");
+		ch=sc.nextInt();
+		
+		switch(ch) {
+		
+		case 1:
+				
+			book.insertData();
+			break;
+		
+		case 2:
+			
+			book.displayData();
+			break;
+		case 3:
+			
+			book.updateData();
+			break;
+		case 4:
+			
+			book.deleteData();
+			break;
+		case 5:
+			System.out.println("Exit");
+		default:
+		}
+		}
+		while(ch!=5);
+		
+	}
+	public Connection getConnect()
+	{
+		try {
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arodb","root","Lipi@2000");
+			return con;
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return null;
+	}
+	public void insertData() {
+		Library l=new Library();
+		System.out.println("enter the book id");
+		double bid=sc.nextDouble();
+		l.setBid(bid);
+		
+		System.out.println("enter the book name");
+		String title=sc.next();
+		l.setTitle(title);
+		
+		System.out.println("enter the author name");
+		String author=sc.next();
+		l.setTitle(author);
+		
+		System.out.println("enter the book price");
+		double price=sc.nextDouble();
+		l.setPrice(price);
+		 
+
+		 
+
+	        try {
+	            
+	        	
+	            Connection con=getConnect();
+	            PreparedStatement pst=con.prepareStatement("insert into book(bid,title,author,price) values(?,?,?,?)");
+	            pst.setDouble(1, l.getBid());
+	            pst.setString(2, l.getTitle());
+	            pst.setString(3, l.getAuthor());
+	            pst.setDouble(4, l.getPrice());
+	            
+	            int x=pst.executeUpdate();
+	            pst.close();
+	            con.close();
+	            if(x==1)
+	            {
+	            	System.out.println("record inserted");
+	            }
+	        } catch (Exception e) {
+	        	
+	        }
+	}
+	public void displayData() {
+		// TODO Auto-generated method stub
+		try {
+			Connection con=getConnect();
+            PreparedStatement pst=con.prepareStatement("select * from book");
+            ResultSet rs=pst.executeQuery();
+             while(rs.next())
+             {
+            	 System.out.println(rs.getDouble(1)+ " "+rs.getString(2)+" "+rs.getString(3)+" "+rs.getDouble(4));
+            	 rs.close();
+            	 pst.close();
+            	 con.close();
+            	 
+            	 
+             }
+		} catch (Exception e) {
+        	
+        }
+		}
+	
+	public void updateData() {
+		// TODO Auto-generated method stub
+		Library l=new Library();
+		System.out.println("enter the book id");
+		double bid=sc.nextDouble();
+		l.setBid(bid);
+		
+		System.out.println("enter the book name");
+		String title=sc.next();
+		l.setTitle(title);
+		
+		System.out.println("enter the author name");
+		String author=sc.next();
+		l.setTitle(author);
+		
+		System.out.println("enter the book price");
+		double price=sc.nextDouble();
+		l.setPrice(price);
+		try {
+			Connection con=getConnect();
+			String str="update book set bid=?,title=?,author=?,price=?";
+            PreparedStatement pst=con.prepareStatement(str);
+            
+            pst.setDouble(1, l.getBid());
+            pst.setString(2, l.getTitle());
+            pst.setString(3, l.getAuthor());
+            pst.setDouble(4, l.getPrice());
+            
+            int x=pst.executeUpdate();
+            pst.close();
+       	 	con.close();
+	       	 if (x==1)
+	         {
+	         	System.out.println("updated");
+	         }
+	         else {
+	         	System.out.println("record not found");
+	         }
+		}
+			catch (Exception e) {
+			        	
+			        }
+		
+	}
+	public void deleteData() {
+		// TODO Auto-generated method stub
+		try {
+			int id;
+			System.out.println("enter the id to delete");
+			
+			id=sc.nextInt();
+			Library l=new Library();
+			l.setBid(id);
+			Connection con=getConnect();
+            PreparedStatement pst=con.prepareStatement("delete");
+            
+            pst.setDouble(1, l.getBid());
+            int x=pst.executeUpdate();
+            
+            pst.close();
+       	 	con.close(); 
+       	 	
+            if (x==1)
+            {
+            	System.out.println("record deleted");
+            }
+            else {
+            	System.out.println("record not found");
+            }
+			
+		}
+		catch(Exception e) {
+			
+		}
+	}
+
+	
+	
+}
